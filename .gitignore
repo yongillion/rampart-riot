@@ -1,0 +1,6 @@
+# one-off commit message read (then deleted) by push_to_github.bat - never commit it
+.commit-message.txt
+# OS clutter
+Thumbs.db
+desktop.ini
+.DS_Store

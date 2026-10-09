@@ -243,7 +243,14 @@ export class BattleScene {
     if (this.opt) return this.opt.onTap(p);
     if (this.loading) return;
     if (this.dialogue) { this.dialogue.tap(); return; }
-    if (this.popup) { if (!this.ui.tap(p) && this.popup.tapAnywhere) this.popup.tapAnywhere(); return; }
+    if (this.popup) {
+      // A button under the pointer gets the tap; anywhere else closes "tap anywhere" cards (NEW ENEMY).
+      // Check the hit first: UI.tap() also returns true when the modal merely swallows the tap,
+      // so its return value can't tell "a button was pressed" from "empty space was tapped".
+      if (this.ui.hit(p.x, p.y)) this.ui.tap(p);
+      else if (this.popup.tapAnywhere) this.popup.tapAnywhere();
+      return;
+    }
     const mouse = p.type === 'mouse';
     if (this.hud.tap(p, mouse)) return;
     const b = this.battle;
@@ -321,6 +328,10 @@ export class BattleScene {
   onKey(k) {
     if (this.opt) return this.opt.onKey(k);
     if (this.dialogue) { if (k === 'Enter' || k === ' ' || k === 'Escape') this.dialogue.tap(); return; }
+    // keyboard players can close a "tap anywhere" card the same way
+    if (this.popup && this.popup.tapAnywhere) { if (k === 'Enter' || k === ' ' || k === 'Escape') this.popup.tapAnywhere(); return; }
+    // Space / P toggle the pause menu both ways (Escape is handled below)
+    if (this.popup && this.popup.kind === 'pause' && (k === ' ' || k === 'p' || k === 'P')) { this.closePopup(); return; }
     if (k === 'Escape') { if (this.popup && this.popup.kind === 'pause') this.closePopup(); else if (this.hud.menu || this.spellMode || this.rallyTower || this.renderer.sel) { this.hud.closeMenu(); this.spellMode = null; this.rallyTower = null; this.renderer.sel = null; } else this.togglePause(); return; }
     if (this.popup) return;
     if (k === ' ' || k === 'p' || k === 'P') this.togglePause();
