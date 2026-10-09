@@ -5,6 +5,7 @@ import { Screen } from '../core/screen.js';
 import { Audio } from '../core/audio.js';
 import { Save } from '../core/save.js';
 import { Assets, drawFrame } from '../core/assets.js';
+import { HD } from '../core/hd.js';
 import { t, has } from '../core/i18n.js';
 import { clamp, TAU, Ease } from '../core/util.js';
 import { panel, text, roundRect } from '../render/draw.js';
@@ -312,17 +313,24 @@ export class EncyclopediaScene extends MenuScene {
     const d = TOWERS[id], base = 't_' + id;
     const anim = d.line === 'mage' || d.line === 'artillery';
     const box = spriteBox(base, anim ? 'idle' : null) || spriteBox(base, 'idle');
-    const f = anim ? unitFrame(base, 'idle', animate ? this.time : 0) : (Assets.frame(base) || unitFrame(base, 'idle', 0));
+    let f = anim ? unitFrame(base, 'idle', animate ? this.time : 0) : (Assets.frame(base) || unitFrame(base, 'idle', 0));
     if (!f || !box) { drawIcon(ctx, d.level === 4 ? id : d.line, cx, cy, Math.min(bw, bh)); return; }
     const sc = Math.min(bw / box.w, bh / box.h);
     const ax = cx - (box.l + box.w / 2) * sc, ay = cy - (box.t + box.h / 2) * sc;
+    // HD copies (js/core/hd.js): the showcase animates hdt_<id>; tiles and the upgrade row use the hdi_towers stills.
+    // Same anchors and logical sizes as the battle art, so they land exactly where it would.
+    const hdOf = (part, t) => animate ? (HD.anim(`hdt_${id}${part}`, 'idle', t) || Assets.frame(`hdt_${id}${part}`)) : Assets.frame(`hdi/t_${id}${part}`);
+    const hf = hdOf('', animate ? this.time : 0);
+    if (hf) f = hf; else if (HD.needed(1, f.s * sc * HD.px(ctx))) HD.want(animate ? 'hdt_' + id : 'hdi_towers');
     drawFrame(ctx, f, ax, ay, false, sc);
     const top = TOWER_TOP[id] || 40;
     if (d.line === 'archer') {
-      if (d.spec === 'arbalest') { const fu = unitFrame('u_arbalest', 'idle', animate ? this.time : 0); if (fu) drawFrame(ctx, fu, ax, ay - (top - 6) * sc, false, sc); }
-      else for (let i = 0; i < 2; i++) { const fu = unitFrame(d.spec === 'gale' ? 'u_gale' : 'u_archer', 'idle', animate ? this.time + i * 0.4 : 0); if (fu) drawFrame(ctx, fu, ax + (i ? 13 : -13) * sc, ay - (top - 8) * sc, false, sc); }
+      const u = d.spec === 'arbalest' ? 'u_arbalest' : d.spec === 'gale' ? 'u_gale' : 'u_archer';
+      const uf = t => hdOf(':' + u, t) || unitFrame(u, 'idle', t);
+      if (d.spec === 'arbalest') { const fu = uf(animate ? this.time : 0); if (fu) drawFrame(ctx, fu, ax, ay - (top - 6) * sc, false, sc); }
+      else for (let i = 0; i < 2; i++) { const fu = uf(animate ? this.time + i * 0.4 : 0); if (fu) drawFrame(ctx, fu, ax + (i ? 13 : -13) * sc, ay - (top - 8) * sc, false, sc); }
     }
-    const ff = Assets.frame(base + '_front');
+    const ff = hdOf('_front', 0) || Assets.frame(base + '_front');
     if (ff) drawFrame(ctx, ff, ax, ay, false, sc);
     return { sc, ax, ay };
   }
@@ -375,7 +383,7 @@ export class EncyclopediaScene extends MenuScene {
     ctx.save(); roundRect(ctx, x + 2, y + 2, s - 4, s - 4, 9 * U); ctx.clip();
     if (sel) { ctx.globalCompositeOperation = 'lighter'; glowDot(ctx, x + s / 2, y + s * 0.55, s * 0.6, '#ffcc66', 0.35); ctx.globalCompositeOperation = 'source-over'; }
     if (enemy) {
-      const r = drawSpriteFit(ctx, 'e_' + id, 'idle', 0, x + s / 2, y + s * 0.52, s * 0.8, s * 0.78, { silhouette: seen ? null : '#0c0806' });
+      const r = drawSpriteFit(ctx, 'e_' + id, 'idle', 0, x + s / 2, y + s * 0.52, s * 0.8, s * 0.78, { silhouette: seen ? null : '#0c0806', hd: 'hdi_enemies', hdFrame: 'hdi/e_' + id });
       if (!r) drawIcon(ctx, 'skull', x + s / 2, y + s / 2, s * 0.5, { alpha: 0.5 });
       if (!seen) text(ctx, '?', x + s / 2, y + s / 2, { size: s * 0.42, align: 'center', color: '#c8a878', stroke: '#0c0806', strokeWidth: s * 0.06, weight: 900, fam: 'display' });
     } else this.drawTowerSprite(ctx, id, x + s / 2, y + s * 0.5, s * 0.82, s * 0.82, false);
@@ -406,7 +414,7 @@ export class EncyclopediaScene extends MenuScene {
       const tt = this.time - this.animT0, ph = tt % 6;
       const an = !seen ? 'idle' : ph < 3 ? 'walk' : ph < 4.2 && Assets.anim(`e_${id}/attack`) ? 'attack' : 'idle';
       const bh = S.h * (d.boss ? 0.86 : d.big ? 0.78 : 0.66), bw = S.w * 0.7;
-      const r = drawSpriteFit(ctx, 'e_' + id, an, ph < 3 ? tt : ph - 3, cx, S.y + S.h * 0.86 - bh / 2 - (d.flying ? S.h * 0.08 : 0), bw, bh, { silhouette: seen ? null : '#0c0806', maxScale: 3.2 * U * 1.5 });
+      const r = drawSpriteFit(ctx, 'e_' + id, an, ph < 3 ? tt : ph - 3, cx, S.y + S.h * 0.86 - bh / 2 - (d.flying ? S.h * 0.08 : 0), bw, bh, { silhouette: seen ? null : '#0c0806', maxScale: 3.2 * U * 1.5, hd: 'hde_' + id });
       if (!r) drawIcon(ctx, 'skull', cx, cy, S.h * 0.5, { alpha: 0.4 });
       if (!seen) text(ctx, '?', cx, cy, { size: S.h * 0.4, align: 'center', color: '#c8a878', stroke: '#0c0806', strokeWidth: S.h * 0.05, weight: 900, fam: 'display' });
     } else {
@@ -416,7 +424,7 @@ export class EncyclopediaScene extends MenuScene {
       // barracks: the squad stands guard beside the building
       if (r && bar) {
         const sp = 's_' + d.unit, gx = cx + S.w * 0.2, ss = r.sc * 1.15;
-        [[-20, -8], [20, -8], [0, 8]].forEach(([ox, oy], i) => { const f = unitFrame(sp, 'idle', this.time + i * 0.3); if (f) drawFrame(ctx, f, gx + ox * ss, r.ay + oy * ss, false, ss); });
+        [[-20, -8], [20, -8], [0, 8]].forEach(([ox, oy], i) => { const t = this.time + i * 0.3, f = HD.anim(`hdt_${id}:${sp}`, 'idle', t) || unitFrame(sp, 'idle', t); if (f) drawFrame(ctx, f, gx + ox * ss, r.ay + oy * ss, false, ss); });
       }
     }
     ctx.restore();

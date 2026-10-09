@@ -12,6 +12,7 @@ import { text, font, wrap, roundRect } from '../render/draw.js';
 import { CHARACTERS } from '../data/story.js';
 import { DW, DH } from '../cine/kit.js';
 import { FILMS } from '../cine/films.js';
+import { HD } from '../core/hd.js';
 
 const XF = 0.7; // default crossfade between shots
 
@@ -30,6 +31,9 @@ export class CutsceneScene {
       ...(F.images || []).map(u => Assets.loadImage(u)),
       Assets.loadImage('assets/ui/logo.png'),
     ]);
+    // HD busts / paintings (js/core/hd.js) start loading now so they're ready by the time they're on screen
+    for (const id of F.cast || []) HD.want('hdp_' + id);
+    for (const u of F.images || []) HD.image(u, true);
     if (F.init) F.init(this.S);
     this.loading = false;
     this.cues = (F.cues || []).slice().sort((a, b) => a.t - b.t);

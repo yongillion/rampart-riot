@@ -1,6 +1,7 @@
 // Rampart Riot — cinematic drawing kit. Everything is painted procedurally at runtime in a 1920x1080
 // "design space" (the cutscene player maps it to the screen with cover-fit), in a silhouette / painterly style.
 import { Assets } from '../core/assets.js';
+import { HD } from '../core/hd.js';
 import { unitFrame } from '../game/renderer.js';
 import { clamp, TAU } from '../core/util.js';
 
@@ -387,17 +388,17 @@ export function raven(ctx, x, y, s, color = '#111') {
 
 // ------------------------------------------------------------------ figures
 // sprite silhouettes: cached tinted copies of atlas frames
-const silCache = new Map();
+const silCache = new WeakMap(); // frame -> Map(color -> canvas); freed with the frame (HD atlases are unloaded)
 function silFrame(f, color) {
-  const key = f.img.src + '|' + f.x + ',' + f.y + '|' + color;
-  let c = silCache.get(key);
+  let m = silCache.get(f);
+  if (!m) { m = new Map(); silCache.set(f, m); }
+  let c = m.get(color);
   if (!c) {
     c = document.createElement('canvas'); c.width = f.w; c.height = f.h;
     const g = c.getContext('2d');
     g.drawImage(f.img, f.x, f.y, f.w, f.h, 0, 0, f.w, f.h);
     g.globalCompositeOperation = 'source-in'; g.fillStyle = color; g.fillRect(0, 0, f.w, f.h);
-    if (silCache.size > 600) silCache.clear();
-    silCache.set(key, c);
+    m.set(color, c);
   }
   return c;
 }
@@ -579,16 +580,20 @@ export class Particles {
 
 // cover-fit image (map / painting) into design space with a camera (cx, cy in image px, zoom)
 export function plate(ctx, url, cx, cy, zoom, o = {}) {
-  const img = Assets.img(url);
-  if (!img) { ctx.fillStyle = o.fallback || '#101014'; ctx.fillRect(0, 0, DW, DH); return false; }
-  const k = Math.max(DW / img.width, DH / img.height) * zoom;
-  ctx.drawImage(img, DW / 2 - cx * k, DH / 2 - cy * k, img.width * k, img.height * k);
+  const base = Assets.img(url);
+  if (!base) { ctx.fillStyle = o.fallback || '#101014'; ctx.fillRect(0, 0, DW, DH); return false; }
+  const k = Math.max(DW / base.width, DH / base.height) * zoom;
+  // HD copy (js/core/hd.js) once the painting would be stretched; the camera stays in the base image's pixels
+  const img = HD.image(url, HD.needed(1, k * HD.px(ctx)));
+  ctx.drawImage(img, DW / 2 - cx * k, DH / 2 - cy * k, base.width * k, base.height * k);
   return k;
 }
 // bust portrait (portraits atlas), optionally mirrored; size = on-screen height of the 128-unit box
 export function portrait(ctx, id, x, y, size, o = {}) {
-  const f = Assets.frame('portrait/' + id);
+  const base = Assets.frame('portrait/' + id);
+  const f = Assets.frame('hdp/' + id) || base;   // HD bust (hdp_<id>) once loaded
   if (!f) return;
+  if (f === base && HD.needed(1, base.s * (size / 128) * HD.px(ctx))) HD.want('hdp_' + id);
   const k = size / 128, s = f.s * k;
   ctx.save(); if (o.alpha !== undefined) ctx.globalAlpha *= o.alpha;
   ctx.translate(x, y); if (o.flip) ctx.scale(-1, 1);

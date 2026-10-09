@@ -1,5 +1,6 @@
 // Rampart Riot — battlefield renderer (map, plots, towers, units, projectiles, overlays)
 import { Assets, drawFrame } from '../core/assets.js';
+import { HD } from '../core/hd.js';
 import { RANGE_Y_SCALE, TAU, clamp } from '../core/util.js';
 import { FIELD } from './battle.js';
 import { text } from '../render/draw.js';
@@ -51,6 +52,8 @@ export class BattleRenderer {
     const v = cam.view();
     // ----- map -----
     if (this.map) {
+      // HD copy of the painted map (js/core/hd.js) once it would be stretched: HiDPI screens, zooming in
+      if (this.mapUrl) { const best = HD.image(this.mapUrl, HD.needed(this.map.width / FIELD.w, HD.px(ctx))); if (best && best !== this.map) this.map = best; }
       const sx = Math.max(0, v.x0 - 2), sy = Math.max(0, v.y0 - 2);
       const sw = Math.min(FIELD.w, v.x1 + 2) - sx, sh = Math.min(FIELD.h, v.y1 + 2) - sy;
       const kx = this.map.width / FIELD.w, ky = this.map.height / FIELD.h;

@@ -58,7 +58,9 @@ export class HUD {
 
   update(dt) {
     this.time += dt;
-    for (const b of this.banners) b.t += dt;
+    // banners wait while the NEW ENEMY card is up (the wave title would otherwise run into the card's header)
+    const held = this.s.popup && this.s.popup.kind === 'newEnemy';
+    if (!held) for (const b of this.banners) b.t += dt;
     this.banners = this.banners.filter(b => b.t < b.life);
     if (this.menu && this.menu.obj && this.menu.kind === 'tower' && !this.b.towers.includes(this.menu.obj)) this.closeMenu();
     if (this.menu && this.menu.kind === 'plot' && this.menu.obj.tower) this.closeMenu();
@@ -493,6 +495,7 @@ export class HUD {
   }
 
   drawBanners(ctx) {
+    if (this.s.popup && this.s.popup.kind === 'newEnemy') return;
     const U = this.U;
     let y = this.H * 0.3;
     for (const bn of this.banners) {

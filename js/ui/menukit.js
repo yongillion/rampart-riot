@@ -5,6 +5,7 @@ import { Screen } from '../core/screen.js';
 import { Audio } from '../core/audio.js';
 import { Save } from '../core/save.js';
 import { Assets, drawFrame } from '../core/assets.js';
+import { HD } from '../core/hd.js';
 import { t, getLang } from '../core/i18n.js';
 import { clamp, lerp, TAU, Ease, RNG } from '../core/util.js';
 import { panel, text, button, circleButton, roundRect, wrap, font } from '../render/draw.js';
@@ -271,13 +272,20 @@ export function spriteBox(sprite, anim = 'idle') {
 }
 // Draws sprite/anim at `time` so that its (stable, idle-based) bounding box is centered in a bw x bh box.
 // Returns {sc, ax, ay} (scale and anchor position) or null if the sprite is not loaded.
+// HD copies (js/core/hd.js): o.hd = atlas to ask for when the frame would be stretched, then either
+//   o.hdSprite: its animated sprite (default o.hd), or o.hdFrame: a single still frame (encyclopedia tiles).
+// They share the regular art's anchor and logical size, so the copy lands exactly where the regular frame would.
 export function drawSpriteFit(ctx, sprite, anim, time, cx, cy, bw, bh, o = {}) {
-  const f = o.frame || unitFrame(sprite, anim, time);
+  let f = o.frame || unitFrame(sprite, anim, time);
   if (!f) return null;
   // o.boxSprite: lay out by another sprite's box (an HD copy drawn exactly where its battle sprite would be)
   const box = (o.boxSprite && spriteBox(o.boxSprite, o.boxAnim || 'idle')) || spriteBox(sprite, o.boxAnim || 'idle') || spriteBox(sprite, anim) || { l: -f.ox * f.s, t: -f.oy * f.s, w: f.w * f.s, h: f.h * f.s };
   const sc = Math.min(bw / box.w, bh / box.h, o.maxScale ?? Infinity);
   const ax = cx - (box.l + box.w / 2) * sc * (o.flip ? -1 : 1), ay = cy - (box.t + box.h / 2) * sc;
+  if (o.hd && !o.frame) {
+    const hf = o.hdFrame ? Assets.frame(o.hdFrame) : HD.anim(o.hdSprite || o.hd, anim, time);
+    if (hf) f = hf; else if (HD.needed(1, f.s * sc * HD.px(ctx))) HD.want(o.hd);
+  }
   if (o.silhouette) drawFrame(ctx, silhouette(f, o.silhouette), ax, ay, !!o.flip, sc);
   else drawFrame(ctx, f, ax, ay, !!o.flip, sc);
   return { sc, ax, ay, box };
@@ -292,7 +300,10 @@ export function heroPortrait(ctx, id, cx, cy, r, time = 0, o = {}) {
   gr.addColorStop(0, o.light || '#5a4632'); gr.addColorStop(1, bg);
   ctx.fillStyle = gr; ctx.fill();
   ctx.clip();
-  const pf = Assets.frame('hd_portrait/' + id) || Assets.frame('portrait/' + id); // HD copy while the hero screen has it loaded
+  // HD copy when the bust is drawn larger than the atlas art: the hero screen's own (hd_<hero>) or hdp_<id>
+  const base = Assets.frame('portrait/' + id);
+  const pf = Assets.frame('hdp/' + id) || Assets.frame('hd_portrait/' + id) || base;
+  if (pf && pf === base && !HD.has('hd_' + id) && HD.needed(1, base.s * (r / 60) * HD.px(ctx))) HD.want('hdp_' + id);
   if (pf) drawFrame(ctx, o.locked ? silhouette(pf, '#140d08') : pf, cx, cy + r * 0.04, false, r / 60);
   else drawSpriteFit(ctx, 'h_' + id, 'idle', time, cx, cy + r * 0.1, r * 1.5, r * 1.55, { silhouette: o.locked ? '#140d08' : null });
   ctx.restore();

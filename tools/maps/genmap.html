@@ -24,7 +24,8 @@ try {
     g.restore();
   }
   document.getElementById('out').appendChild(cv);
-  window.__result = { jpg: cv.toDataURL('image/jpeg', +(q.get('q') || 0.86)) };
+  // ?fmt=webp&scale=2 is used for the HD copies (map_<id>_hd.webp)
+  window.__result = { jpg: cv.toDataURL('image/' + (q.get('fmt') || 'jpeg'), +(q.get('q') || 0.86)) };
 } catch (e) { document.getElementById('log').textContent = 'ERROR ' + e.stack; window.__error = String(e.stack || e); }
 window.__done = true;
 </script></body></html>

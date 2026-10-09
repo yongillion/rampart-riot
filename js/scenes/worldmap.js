@@ -7,6 +7,7 @@ import { Screen } from '../core/screen.js';
 import { Audio } from '../core/audio.js';
 import { Save } from '../core/save.js';
 import { Assets } from '../core/assets.js';
+import { HD } from '../core/hd.js';
 import { t, L } from '../core/i18n.js';
 import { clamp, lerp, TAU, Ease, RNG } from '../core/util.js';
 import { panel, text, roundRect } from '../render/draw.js';
@@ -686,7 +687,8 @@ export class WorldMapScene extends MenuScene {
     const c = this.cam, W = this.world;
     ctx.fillStyle = '#2a1c10'; ctx.fillRect(0, 0, w, h);
     // ---- map image (visible part only)
-    const img = W.img, kx = img.width / W.w, ky = img.height / W.h;
+    // HD painting (js/core/hd.js) once the map would be stretched: large/HiDPI screens, zooming in
+    const img = HD.image(W.image, HD.needed(W.img.width / W.w, c.z * HD.px(ctx))) || W.img, kx = img.width / W.w, ky = img.height / W.h;
     const x0 = Math.max(0, c.wx(0)), y0 = Math.max(0, c.wy(0)), x1 = Math.min(W.w, c.wx(w)), y1 = Math.min(W.h, c.wy(h));
     // scaled layers: mip-mapped bilinear for the map, plain bilinear for soft layers (bicubic 'high' is costly)
     ctx.imageSmoothingQuality = 'medium';

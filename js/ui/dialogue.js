@@ -4,6 +4,7 @@ import { Audio } from '../core/audio.js';
 import { getLang, t } from '../core/i18n.js';
 import { panel, text, wrap, roundRect } from '../render/draw.js';
 import { Assets, drawFrame, drawFrameFit } from '../core/assets.js';
+import { HD } from '../core/hd.js';
 import { CHARACTERS } from '../data/story.js';
 
 export function lineText(l) { return l[getLang()] || l.en || l.ko || (l.k ? t(l.k) : ''); }
@@ -55,7 +56,10 @@ export class Dialogue {
       ctx.fillStyle = ch.bg || '#3a2a1c'; ctx.fill();
       ctx.lineWidth = 6 * U; ctx.strokeStyle = '#d8b052'; ctx.stroke();
       ctx.clip();
-      const f = Assets.frame('portrait/' + (ch.portrait || l.who));
+      const pid = ch.portrait || l.who, base = Assets.frame('portrait/' + pid);
+      // HD bust (hdp_<id>, js/core/hd.js) once the atlas one would be stretched
+      const f = Assets.frame('hdp/' + pid) || base;
+      if (f && f === base && HD.needed(1, base.s * (pr / 60) * HD.px(ctx))) HD.want('hdp_' + pid);
       // portraits are 128x128-unit busts facing right, anchored at their centre; speakers on the right face left
       if (f) drawFrame(ctx, f, px, py, right, pr / 60);
       else { ctx.fillStyle = ch.color || '#888'; ctx.beginPath(); ctx.arc(px, py + pr * 0.3, pr * 0.7, 0, Math.PI * 2); ctx.fill(); }

@@ -1045,14 +1045,16 @@ function maelisFigure(g) {
 }
 
 function maelis(g) {
-  const off = document.createElement('canvas'); off.width = 256; off.height = 256;
-  const o = off.getContext('2d'); o.scale(2, 2);
+  // offscreen at the current render scale (2 for the portraits atlas, more for the HD copies)
+  const k = g.getTransform().a, P = Math.round(128 * k);
+  const off = document.createElement('canvas'); off.width = P; off.height = P;
+  const o = off.getContext('2d'); o.scale(k, k);
   maelisFigure(o);
   // unify into cool blues, then let the figure dissolve into mist toward the bottom
   o.setTransform(1, 0, 0, 1, 0, 0);
-  o.globalCompositeOperation = 'source-atop'; o.fillStyle = 'rgba(110,160,235,0.22)'; o.fillRect(0, 0, 256, 256);
+  o.globalCompositeOperation = 'source-atop'; o.fillStyle = 'rgba(110,160,235,0.22)'; o.fillRect(0, 0, P, P);
   o.globalCompositeOperation = 'destination-in';
-  o.fillStyle = lg(o, 0, 0, 0, 256, [[0, 'rgba(0,0,0,0.94)'], [0.6, 'rgba(0,0,0,0.9)'], [0.82, 'rgba(0,0,0,0.5)'], [1, 'rgba(0,0,0,0)']]); o.fillRect(0, 0, 256, 256);
+  o.fillStyle = lg(o, 0, 0, 0, P, [[0, 'rgba(0,0,0,0.94)'], [0.6, 'rgba(0,0,0,0.9)'], [0.82, 'rgba(0,0,0,0.5)'], [1, 'rgba(0,0,0,0)']]); o.fillRect(0, 0, P, P);
   glow(g, 66, 48, 62, '#5a9aff', 0.32);
   g.drawImage(off, 0, 0, 128, 128);
   // drifting motes of light
@@ -1101,7 +1103,7 @@ function heart(g) {
   const cp = sp(core);
   clipIn(g, cp, () => {
     g.fillStyle = rg(g, cx + 1, cy + 2, 0, 32, [[0, '#ffe080'], [0.4, '#ffb030'], [0.75, '#ff7018'], [1, '#c02c08']]); g.fillRect(0, 0, 128, 128);
-    g.save(); g.filter = 'blur(2.4px)';
+    g.save(); g.filter = `blur(${1.2 * g.getTransform().a}px)`; // CSS blur ignores the transform: 2.4 px at the atlas scale of 2
     g.fillStyle = alpha('#8a1c04', 0.9);
     g.fill(sp([[cx - 23, cy - 10], [cx - 8, cy - 5], [cx + 1, cy - 9, 1], [cx + 10, cy - 5], [cx + 25, cy - 10], [cx + 22, cy - 2], [cx + 10, cy + 0.4], [cx + 1, cy - 3], [cx - 8, cy + 0.4], [cx - 20, cy - 2]]));
     g.fill(sp([[cx - 17, cy + 4], [cx - 11, cy + 9], [cx - 15, cy + 15]])); g.fill(sp([[cx + 18, cy + 4], [cx + 12, cy + 9], [cx + 16, cy + 15]]));

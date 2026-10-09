@@ -3,6 +3,7 @@ import { App } from './core/engine.js';
 import { Audio } from './core/audio.js';
 import { Save } from './core/save.js';
 import { Screen } from './core/screen.js';
+import { Assets } from './core/assets.js';
 import { setLang } from './core/i18n.js';
 import { BootScene } from './scenes/boot.js';
 import { BattleScene } from './scenes/battle.js';
@@ -15,6 +16,9 @@ setLang(Save.settings.lang);
 Audio.setVolumes({ music: Save.settings.music, sfx: Save.settings.sfx });
 Audio.setMuted(!!Save.settings.muted);
 if (Save.settings.quality === 'low') Screen.quality = 'low';
+// UI icons are drawn up to ~2.5x their atlas size on sharp screens: use the 2x / 4x icon atlas there (same frame names)
+// (decided when the atlas loads: the screen is measured once the app starts)
+Assets.alias.ui = () => { const k = Screen.quality === 'low' ? 0 : Screen.dpr * Screen.uiScale; return k >= 2.2 ? 'ui8' : k >= 1.25 ? 'ui4' : 'ui'; };
 
 app.register('boot', BootScene);
 app.register('battle', BattleScene);

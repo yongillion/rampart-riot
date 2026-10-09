@@ -3,6 +3,7 @@
 
 class AssetStore {
   constructor() {
+    this.alias = {};          // atlas name -> file set (or fn returning one) to load instead, e.g. ui -> ui4 on sharp screens
     this.images = new Map();
     this.atlases = new Map();
     this.frames = new Map();
@@ -54,7 +55,8 @@ class AssetStore {
 
   async _loadAtlas(name, base) {
     let data;
-    try { data = await this.loadJSON(base + name + '.json'); }
+    const al = this.alias[name], file = (typeof al === 'function' ? al() : al) || name;
+    try { data = await this.loadJSON(base + file + '.json'); }
     catch (e) { console.warn('atlas json failed', name, e); return null; }
     await this.detectWebp();
     const pages = await Promise.all(data.pages.map(async p => {

@@ -4,6 +4,7 @@ import { Input } from './input.js';
 import { Audio } from './audio.js';
 import { Save } from './save.js';
 import { clamp } from './util.js';
+import { HD } from './hd.js';
 
 export class App {
   constructor(stage, canvas) {
@@ -62,8 +63,11 @@ export class App {
     this.fadeDir = 1;
   }
   _switch(scene, params) {
-    if (this.scene && this.scene.exit) this.scene.exit();
+    const old = this.scene;
+    if (old && old.exit) old.exit();
+    if (old) HD.release(old);   // HD art the old scene asked for (js/core/hd.js)
     this.scene = scene;
+    HD.owner = scene;
     this.input.reset();
     if (scene.layout) scene.layout();
     if (scene.enter) scene.enter(params || {});

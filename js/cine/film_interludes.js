@@ -199,7 +199,7 @@ const LETTER = {
   en: ['When the wall falls, this realm will need', 'a king who does not fear fire.', 'Your price will be paid in black glass.', '— V. M.'],
 };
 const C2_MID = {
-  music: 'story_tension', musicLoop: true, dur: 32, atlases: ['portraits'],
+  music: 'story_tension', musicLoop: true, dur: 32, atlases: ['portraits'], cast: ['brannoc'],
   captions: [
     { t: 0.9, d: 5.4, ko: '모로우의 진지에서, 편지 한 통이 나왔다.', en: 'In Morrow\'s camp, a letter was found.' },
     { t: 26.4, d: 5.0, who: 'brannoc', ko: '모로우… 그 이름을 다시 듣게 될 줄은 몰랐소.', en: 'Morrow... I never thought I\'d hear that name again.' },
@@ -273,7 +273,7 @@ function letter(ctx, T, lt) {
 
 // ------------------------------------------------------------------ c2_end — What the Ice Kept (after 2-8)
 const C2_END = {
-  music: 'story_somber', musicLoop: true, dur: 49, atlases: ['enemies2', 'enemies3', 'portraits'], images: [MAP],
+  music: 'story_somber', musicLoop: true, dur: 49, atlases: ['enemies2', 'enemies3', 'portraits'], images: [MAP], cast: ['seren', 'brannoc'],
   init(S) {
     S.snow = new Particles({ kind: 'dot', rate: 40, x0: -100, x1: 2100, y0: -20, y1: -10, vx: -40, vxr: 30, vy: 90, vyr: 30, life: 16, size: 2.6, sway: 22, color: '#ffffff', alpha: 0.8 }); S.snow.prefill(8);
   },
@@ -424,7 +424,7 @@ function cathedralNight(ctx, S, T, lt) {
 
 // ------------------------------------------------------------------ c3_end — The Wall Answers (after 3-8)
 const C3_END = {
-  music: 'story_hope', musicLoop: true, dur: 49, atlases: ['enemies3', 'units', 'portraits'],
+  music: 'story_hope', musicLoop: true, dur: 49, atlases: ['enemies3', 'units', 'portraits'], cast: ['seren', 'brannoc'],
   init(S) { S.sparks = new Particles({ kind: 'ember', add: true, rate: 0, life: 2, size: 3, vx: 0, vxr: 500, vy: -200, vyr: 300, g: 200, color: '#ffb060' }); },
   update(S, dt) { S.sparks.update(dt); },
   cues: [{ t: 3.0, sfx: 'cine_whoosh', vol: 0.8 }, { t: 11.5, sfx: 'wall_crack', vol: 0.9 }, { t: 11.5, shake: 9, d: 1.6 }, { t: 33.5, sfx: 'gate_break', vol: 0.6 }],

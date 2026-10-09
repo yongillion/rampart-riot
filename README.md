@@ -35,6 +35,11 @@ There is no build step; copy the folder as-is.
 Click or tap to build, upgrade and sell, and to place rally points and the hero. Mouse wheel zooms, drag pans.
 Keys: `Space`/`P` pause, `1` Skyfall, `2` Call to Arms, `H` select hero, `W` call wave, `F` speed, `Esc` back. `F2` shows FPS.
 
+### Sharp art on big screens
+Battles draw the sprite atlases at about 1:1. Wherever the game shows art larger than that (hero screen, NEW ENEMY
+card, encyclopedia, portraits, zoomed-in maps, icons on high-DPI screens) it swaps in an HD copy, loaded only when the
+regular art would be stretched and freed when you leave the screen (`js/core/hd.js`). Phones skip the large map copies.
+
 ## Project layout
 
 ```
@@ -68,7 +73,8 @@ Start a local server on port 8080 first, because the tools drive headless Chromi
 | What | Command |
 |---|---|
 | Sprite atlas | `node tools/art/export.mjs towers units heroes enemies1 enemies2 enemies3 enemies4 fx ui props portraits`, then `python3 tools/art/webp.py` |
-| HD hero screen | `node tools/art/export.mjs hd_brannoc hd_kaela hd_seren hd_torvald hd_aerin hd_ysolde`, then `python3 tools/art/webp.py hd_brannoc hd_kaela hd_seren hd_torvald hd_aerin hd_ysolde`. Sharp copies of the hero sprites and portraits for the Hall of Heroes (`tools/art/lib/hd.js`). Re-run after changing `sets/heroes.js` or `sets/portraits.js` |
+| HD art | `node tools/art/export.mjs <sets>`, then `python3 tools/art/webp.py <sets>` and delete the new PNG pages except `ui4`/`ui8`. Sets: `hd_<hero>` (hero screen), `hde_<enemy>` (NEW ENEMY card, encyclopedia), `hdt_<tower>`, `hdi_enemies`, `hdi_towers` (encyclopedia), `hdp_<id>` (portraits in dialogues and cutscenes), `ui4`/`ui8` (2x/4x icons). Built from the regular sets by `tools/art/lib/hd.js`; re-run after changing those |
+| HD maps | `node tools/maps/export.mjs --hd 1-1 1-2 …` (4800x2700 WebP)  ·  `node tools/keyart/export.mjs "worldmap&scale=1.6"` (5120x2880) |
 | Contact sheet | `node tools/art/export.mjs --sheet enemies2 "" /tmp/sheet.png 8 150 5a6a4a 2` |
 | Battle maps | `node tools/maps/export.mjs 1-1 1-2 …`  ·  `node tools/maps/checklevel.mjs` |
 | Key art | `node tools/keyart/export.mjs title logo worldmap icons` |

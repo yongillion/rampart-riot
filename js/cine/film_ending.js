@@ -9,7 +9,7 @@ import {
 
 export const ENDING = {
   music: 'ending', sync: true, dur: 120, fadeIn: 2.0, fadeOut: 4.0,
-  atlases: ['enemies4', 'heroes', 'portraits', 'units'],
+  atlases: ['enemies4', 'heroes', 'portraits', 'units'], cast: ['seren', 'brannoc'],
   init(S) {
     S.ash = new Particles({ kind: 'dot', rate: 34, x0: -100, x1: 2100, y0: -20, y1: -10, vx: -25, vxr: 25, vy: 70, vyr: 25, life: 18, size: 2.6, sway: 22, color: '#d8d0c8', alpha: 0.75, max: 600 });
     S.ash.prefill(12);

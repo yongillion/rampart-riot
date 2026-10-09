@@ -1,5 +1,6 @@
 // Paint battlefield maps via headless Chromium.
 // usage: node tools/maps/export.mjs 1-1 1-2 ...        -> assets/maps/map_1_1.jpg ...
+//        node tools/maps/export.mjs --hd 1-1 1-2 ...   -> assets/maps/map_1_1_hd.webp ... (2x)
 //        node tools/maps/export.mjs --preview 1-1 [out.jpg] [overlay]  -> preview jpg (with path/plot overlay)
 import { createRequire } from 'module';
 import fs from 'fs';
@@ -24,12 +25,14 @@ if (args[0] === '--preview') {
   const d = await run(id, args[3] ? '&overlay=1&q=0.8' : '&q=0.8');
   if (d) { fs.writeFileSync(out, Buffer.from(d.split(',')[1], 'base64')); console.log('preview', id, '->', out); }
 } else {
+  // --hd: 2x copies (4800x2700 WebP) that the game swaps in when a map is drawn enlarged (HiDPI screens, zooming in)
+  const hd = args[0] === '--hd'; if (hd) args.shift();
   const dir = path.join(root, 'assets/maps'); fs.mkdirSync(dir, { recursive: true });
   for (const id of args) {
     const t0 = Date.now();
-    const d = await run(id);
+    const d = await run(id, hd ? '&scale=2&fmt=webp&q=0.82' : '');
     if (!d) { console.log('FAILED', id); continue; }
-    const f = path.join(dir, `map_${id.replace('-', '_')}.jpg`);
+    const f = path.join(dir, `map_${id.replace('-', '_')}${hd ? '_hd.webp' : '.jpg'}`);
     fs.writeFileSync(f, Buffer.from(d.split(',')[1], 'base64'));
     console.log(id, '->', path.basename(f), (fs.statSync(f).size / 1024).toFixed(0) + ' KB', (Date.now() - t0) + 'ms');
   }

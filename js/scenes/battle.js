@@ -2,6 +2,7 @@
 import { Screen } from '../core/screen.js';
 import { Audio } from '../core/audio.js';
 import { Assets } from '../core/assets.js';
+import { HD } from '../core/hd.js';
 import { Save } from '../core/save.js';
 import { t, L } from '../core/i18n.js';
 import { clamp, TAU, fmtInt } from '../core/util.js';
@@ -59,7 +60,7 @@ export class BattleScene {
     const slot = Save.slot;
     const heroId = slot ? slot.hero : 'brannoc';
     const jobs = [
-      Assets.loadImage(`assets/maps/${this.level.mapImage || 'map_' + this.stageId.replace('-', '_')}.jpg`).then(img => { this.mapImg = img; }),
+      Assets.loadImage(this.mapUrl = `assets/maps/${this.level.mapImage || 'map_' + this.stageId.replace('-', '_')}.jpg`).then(img => { this.mapImg = img; }),
       Assets.loadAtlas('towers'), Assets.loadAtlas('units'), Assets.loadAtlas('fx'), Assets.loadAtlas('ui'),
       Assets.loadAtlas('heroes'), Assets.loadAtlas('props'), Assets.loadAtlas('portraits'),
       Assets.loadAtlas('enemies' + this.ch),
@@ -83,6 +84,7 @@ export class BattleScene {
     });
     this.renderer = new BattleRenderer(this.battle, this.cam, this.fx);
     this.renderer.setMap(this.mapImg);
+    this.renderer.mapUrl = this.mapUrl;
     this.props = new MapProps(this, this.level);
     this.renderer.props = this.props.list;
     this.hud = new HUD(this);
@@ -345,7 +347,7 @@ export class BattleScene {
   onResume() {}
 
   // ------------------------------------------------------------------ popups
-  closePopup() { this.popup = null; this.ui.clear(); this.ui.modal = null; }
+  closePopup() { if (this.popup && this.popup.hd) HD.drop(this.popup.hd); this.popup = null; this.ui.clear(); this.ui.modal = null; }
 
   showPause() {
     this.hud.closeMenu();
@@ -402,7 +404,7 @@ export class BattleScene {
   showNewEnemy(type) {
     const U = Screen.uiScale;
     const d = ENEMIES[type];
-    const pop = { kind: 'newEnemy', t: 0 };
+    const pop = { kind: 'newEnemy', t: 0, hd: 'hde_' + type };   // HD copy of the enemy, freed when the card closes
     pop.update = dt => { pop.t += dt; };
     pop.layout = () => {
       this.ui.clear(); this.ui.modal = 10;
@@ -422,8 +424,10 @@ export class BattleScene {
       ctx.beginPath(); ctx.arc(px, py, 78 * U, 0, TAU); ctx.fillStyle = '#3a2a1c'; ctx.fill(); ctx.lineWidth = 4 * U; ctx.strokeStyle = '#d8b052'; ctx.stroke();
       ctx.save(); ctx.beginPath(); ctx.arc(px, py, 74 * U, 0, TAU); ctx.clip();
       ctx.fillStyle = '#6f8a4a'; ctx.fillRect(px - 80 * U, py - 80 * U, 160 * U, 160 * U);
-      const f = Assets.frame('portrait/e_' + type) || unitFrame('e_' + type, 'idle', this.time);
-      if (f) drawFrameFit(ctx, f, px, py + 6 * U, (d.boss ? 150 : 120) * U);
+      const base = Assets.frame('portrait/e_' + type) || unitFrame('e_' + type, 'idle', this.time), size = (d.boss ? 150 : 120) * U;
+      const f = HD.anim(pop.hd, 'idle', this.time) || base;
+      if (f && f === base && HD.needed(Math.max(base.w, base.h), size * HD.px(ctx))) HD.want(pop.hd);
+      if (f) drawFrameFit(ctx, f, px, py + 6 * U, size);
       ctx.restore();
       const tx = r.x + 210 * U, tw = r.w - 230 * U;
       text(ctx, t(`enemy.${type}.name`), tx, r.y + 44 * U, { size: 26 * U, color: '#4a1c0a', weight: 900 });

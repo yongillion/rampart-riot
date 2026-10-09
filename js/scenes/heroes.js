@@ -5,6 +5,7 @@ import { Screen } from '../core/screen.js';
 import { Audio } from '../core/audio.js';
 import { Save } from '../core/save.js';
 import { Assets } from '../core/assets.js';
+import { HD } from '../core/hd.js';
 import { t, L } from '../core/i18n.js';
 import { clamp, TAU, Ease } from '../core/util.js';
 import { panel, text, roundRect } from '../render/draw.js';
@@ -58,19 +59,12 @@ export class HeroesScene extends MenuScene {
     const s = Save.slot;
     this.view = (p.hero && HEROES[p.hero]) ? p.hero : (HEROES[s.hero] ? s.hero : 'brannoc');
     this.markSeen(this.view);
-    this.gone = false;
     this.loadHD(this.view);
     this.layout();
   }
-  exit() { super.exit(); this.gone = true; for (const n of this.hd || []) Assets.unloadAtlas(n); this.hd = []; }
   // The pedestal draws the hero ~3-6x larger than the battle sprites, so it uses an HD copy of the same art
-  // (assets/sprites/hd_<id>.json, made by tools/art/lib/hd.js). Loaded on demand; at most two are kept in memory.
-  loadHD(id) {
-    const name = 'hd_' + id;
-    this.hd = (this.hd || []).filter(n => n !== name); this.hd.push(name);
-    while (this.hd.length > 2) Assets.unloadAtlas(this.hd.shift());
-    Assets.loadAtlas(name).then(a => { if (a && (this.gone || !this.hd.includes(name))) Assets.unloadAtlas(name); }).catch(() => {});
-  }
+  // (assets/sprites/hd_<id>.json). js/core/hd.js keeps the last two and frees them when the screen closes.
+  loadHD(id) { HD.want('hd_' + id); }
   goBack() { this.app.go(this.params.back || 'worldmap', this.params.backParams || {}); }
 
   unlocked(id) { return !!Save.slot.heroes[id]; }

@@ -8,7 +8,8 @@ const q = new URLSearchParams(location.search);
 const set = q.get('set') || 'towers';
 const log = m => { document.getElementById('log').textContent = m; };
 try {
-  const mod = await import(`./sets/${set}.js?v=${Date.now()}`);
+  // HD showcase sets (hd_*, hde_*, hdt_*, hdp_*, hdi_*, ui4, ui8) are built from the regular sets by lib/hd.js
+  const mod = (await (await import('./lib/hd.js')).hdSet(set)) || await import(`./sets/${set}.js?v=${Date.now()}`);
   const res = await buildAtlas(set, mod, { maxW: +(q.get('maxw') || 2048), maxH: +(q.get('maxh') || 2048) });
   log(`${set}: ${res.frames.length} frames, ${res.pages.length} pages, ${res.ms.toFixed(0)} ms`);
   if (q.get('sheet')) {

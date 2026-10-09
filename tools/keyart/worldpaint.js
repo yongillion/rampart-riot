@@ -1038,7 +1038,10 @@ function debugOverlay(g) {
 export async function render(q) {
   const t0 = performance.now();
   GLOWS = []; VIOLET = [];
-  const cv = mk(W, H), g = cv.getContext('2d');
+  // ?scale=1.6 paints the HD copy (worldmap_hd.webp, 5120x2880) the game swaps in on large screens / when zoomed in
+  const PXS = +(q.get('scale') || 1); // (S is the stage-position table)
+  const cv = mk(W * PXS, H * PXS), g = cv.getContext('2d');
+  g.scale(PXS, PXS);
   setOL(1.6);
   const R = rngf(2024);
   const O = buildOcc(WORLD.roads);
@@ -1094,5 +1097,5 @@ export async function render(q) {
   atmosphere(g, rngf(53), [...smokes, [CRATER.x + 20, CRATER.y - 40]]);
   if (q.get('debug')) debugOverlay(g);
   console.log(`worldmap ${(performance.now() - t0) | 0}ms, ${items.length} items`);
-  return [{ name: 'worldmap.jpg', canvas: cv, type: 'jpeg', quality: 0.85 }];
+  return [PXS > 1 ? { name: 'worldmap_hd.webp', canvas: cv, type: 'webp', quality: 0.82 } : { name: 'worldmap.jpg', canvas: cv, type: 'jpeg', quality: 0.85 }];
 }
