@@ -44,8 +44,15 @@ class AssetStore {
     return j;
   }
 
-  async loadAtlas(name, base = 'assets/sprites/') {
-    if (this.atlases.has(name)) return this.atlases.get(name);
+  // concurrent calls for the same atlas share one load
+  loadAtlas(name, base = 'assets/sprites/') {
+    if (this.atlases.has(name)) return Promise.resolve(this.atlases.get(name));
+    this.pending = this.pending || new Map();
+    if (!this.pending.has(name)) this.pending.set(name, this._loadAtlas(name, base).finally(() => this.pending.delete(name)));
+    return this.pending.get(name);
+  }
+
+  async _loadAtlas(name, base) {
     let data;
     try { data = await this.loadJSON(base + name + '.json'); }
     catch (e) { console.warn('atlas json failed', name, e); return null; }
@@ -76,6 +83,8 @@ class AssetStore {
     if (!a) return;
     for (const f of a.frameNames) this.frames.delete(f);
     for (const k of [...this.anims.keys()]) { const an = this.anims.get(k); if (an.frames[0] && a.pages.includes(an.frames[0].img)) this.anims.delete(k); }
+    // drop the decoded pages as well, otherwise the image cache keeps them in memory
+    for (const [url, img] of [...this.images]) if (a.pages.includes(img)) this.images.delete(url);
     this.atlases.delete(name);
   }
 

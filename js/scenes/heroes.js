@@ -58,7 +58,18 @@ export class HeroesScene extends MenuScene {
     const s = Save.slot;
     this.view = (p.hero && HEROES[p.hero]) ? p.hero : (HEROES[s.hero] ? s.hero : 'brannoc');
     this.markSeen(this.view);
+    this.gone = false;
+    this.loadHD(this.view);
     this.layout();
+  }
+  exit() { super.exit(); this.gone = true; for (const n of this.hd || []) Assets.unloadAtlas(n); this.hd = []; }
+  // The pedestal draws the hero ~3-6x larger than the battle sprites, so it uses an HD copy of the same art
+  // (assets/sprites/hd_<id>.json, made by tools/art/lib/hd.js). Loaded on demand; at most two are kept in memory.
+  loadHD(id) {
+    const name = 'hd_' + id;
+    this.hd = (this.hd || []).filter(n => n !== name); this.hd.push(name);
+    while (this.hd.length > 2) Assets.unloadAtlas(this.hd.shift());
+    Assets.loadAtlas(name).then(a => { if (a && (this.gone || !this.hd.includes(name))) Assets.unloadAtlas(name); }).catch(() => {});
   }
   goBack() { this.app.go(this.params.back || 'worldmap', this.params.backParams || {}); }
 
@@ -121,6 +132,7 @@ export class HeroesScene extends MenuScene {
   show(id) {
     if (this.view === id) return;
     this.view = id; this.markSeen(id);
+    this.loadHD(id);
     Audio.sfx(this.unlocked(id) ? 'ui_click' : 'ui_error', { vol: this.unlocked(id) ? 1 : 0.5 });
     this.info.scrollTo(0, true);
     this.anim = { name: 'idle', t0: this.time, next: this.time + 2.5 };
@@ -317,7 +329,9 @@ export class HeroesScene extends MenuScene {
     const cy = gy - bh / 2 - (flying ? bh * 0.12 : 0) + ph * 0.1;
     ctx.save(); ctx.translate(cx, gy); ctx.scale(sw, sw); ctx.translate(-cx, -gy);
     const a = this.anim;
-    const r = drawSpriteFit(ctx, 'h_' + id, unl ? a.name : 'idle', unl ? this.time - a.t0 : 0, cx, cy, bw, bh, { silhouette: unl ? null : '#1a110a', maxScale: 3 * U * 1.6 });
+    // HD copy once it has loaded (same art and anchor, laid out by the battle sprite's box, so it only gets sharper)
+    const sprite = Assets.anim(`hd_${id}/idle`) ? 'hd_' + id : 'h_' + id;
+    const r = drawSpriteFit(ctx, sprite, unl ? a.name : 'idle', unl ? this.time - a.t0 : 0, cx, cy, bw, bh, { silhouette: unl ? null : '#1a110a', maxScale: 3 * U * 1.6, boxSprite: 'h_' + id });
     if (!r) { ctx.beginPath(); ctx.arc(cx, cy, Math.min(bw, bh) * 0.3, 0, TAU); ctx.fillStyle = HEROES[id].color; ctx.fill(); }
     if (!unl) drawIcon(ctx, 'lock', cx, cy, Math.min(bw, bh) * 0.28);
     ctx.restore();

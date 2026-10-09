@@ -68,6 +68,7 @@ Start a local server on port 8080 first, because the tools drive headless Chromi
 | What | Command |
 |---|---|
 | Sprite atlas | `node tools/art/export.mjs towers units heroes enemies1 enemies2 enemies3 enemies4 fx ui props portraits`, then `python3 tools/art/webp.py` |
+| HD hero screen | `node tools/art/export.mjs hd_brannoc hd_kaela hd_seren hd_torvald hd_aerin hd_ysolde`, then `python3 tools/art/webp.py hd_brannoc hd_kaela hd_seren hd_torvald hd_aerin hd_ysolde`. Sharp copies of the hero sprites and portraits for the Hall of Heroes (`tools/art/lib/hd.js`). Re-run after changing `sets/heroes.js` or `sets/portraits.js` |
 | Contact sheet | `node tools/art/export.mjs --sheet enemies2 "" /tmp/sheet.png 8 150 5a6a4a 2` |
 | Battle maps | `node tools/maps/export.mjs 1-1 1-2 …`  ·  `node tools/maps/checklevel.mjs` |
 | Key art | `node tools/keyart/export.mjs title logo worldmap icons` |

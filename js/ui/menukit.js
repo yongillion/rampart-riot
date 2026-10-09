@@ -241,7 +241,7 @@ export function iconGray(ctx, name, x, y, size, alpha = 0.9) {
   ctx.restore();
 }
 // solid silhouette of a sprite frame (for unseen bestiary entries); returns a frame-like object for drawFrame
-const silCache = new Map();
+const silCache = new WeakMap(); // keyed by frame: lets unloaded (HD) atlases be freed
 export function silhouette(f, color = '#1a110a') {
   if (!f) return null;
   let s = silCache.get(f);
@@ -274,7 +274,8 @@ export function spriteBox(sprite, anim = 'idle') {
 export function drawSpriteFit(ctx, sprite, anim, time, cx, cy, bw, bh, o = {}) {
   const f = o.frame || unitFrame(sprite, anim, time);
   if (!f) return null;
-  const box = spriteBox(sprite, o.boxAnim || 'idle') || spriteBox(sprite, anim) || { l: -f.ox * f.s, t: -f.oy * f.s, w: f.w * f.s, h: f.h * f.s };
+  // o.boxSprite: lay out by another sprite's box (an HD copy drawn exactly where its battle sprite would be)
+  const box = (o.boxSprite && spriteBox(o.boxSprite, o.boxAnim || 'idle')) || spriteBox(sprite, o.boxAnim || 'idle') || spriteBox(sprite, anim) || { l: -f.ox * f.s, t: -f.oy * f.s, w: f.w * f.s, h: f.h * f.s };
   const sc = Math.min(bw / box.w, bh / box.h, o.maxScale ?? Infinity);
   const ax = cx - (box.l + box.w / 2) * sc * (o.flip ? -1 : 1), ay = cy - (box.t + box.h / 2) * sc;
   if (o.silhouette) drawFrame(ctx, silhouette(f, o.silhouette), ax, ay, !!o.flip, sc);
@@ -291,7 +292,7 @@ export function heroPortrait(ctx, id, cx, cy, r, time = 0, o = {}) {
   gr.addColorStop(0, o.light || '#5a4632'); gr.addColorStop(1, bg);
   ctx.fillStyle = gr; ctx.fill();
   ctx.clip();
-  const pf = Assets.frame('portrait/' + id);
+  const pf = Assets.frame('hd_portrait/' + id) || Assets.frame('portrait/' + id); // HD copy while the hero screen has it loaded
   if (pf) drawFrame(ctx, o.locked ? silhouette(pf, '#140d08') : pf, cx, cy + r * 0.04, false, r / 60);
   else drawSpriteFit(ctx, 'h_' + id, 'idle', time, cx, cy + r * 0.1, r * 1.5, r * 1.55, { silhouette: o.locked ? '#140d08' : null });
   ctx.restore();

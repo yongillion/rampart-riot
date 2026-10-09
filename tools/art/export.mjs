@@ -40,7 +40,7 @@ if (args[0] === '--sheet') {
     const r = await run(set);
     if (!r) { console.log('FAILED', set); continue; }
     // remove stale pages
-    for (const f of fs.readdirSync(outDir)) if (f.startsWith(set + '_') && f.endsWith('.png')) fs.unlinkSync(path.join(outDir, f));
+    for (const f of fs.readdirSync(outDir)) if (/^\d+\.(png|webp)$/.test(f.slice(set.length + 1)) && f.startsWith(set + '_')) fs.unlinkSync(path.join(outDir, f)); // stale PNG + WebP pages
     r.pages.forEach((d, i) => fs.writeFileSync(path.join(outDir, `${set}_${i}.png`), Buffer.from(d.split(',')[1], 'base64')));
     fs.writeFileSync(path.join(outDir, `${set}.json`), JSON.stringify(r.json));
     const sz = r.pages.reduce((a, d) => a + d.length * 0.75, 0);
