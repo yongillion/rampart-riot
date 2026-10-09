@@ -1,0 +1,22 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Rampart Riot — key art painter</title>
+<style>body{margin:0;background:#333;color:#ddd;font:12px monospace}canvas{display:block;max-width:100%;margin:4px 0}</style></head>
+<body><div id="log">painting…</div><div id="out"></div>
+<script type="module">
+// Runs one key-art painter (?what=title|logo|worldmap|icons) and exposes the encoded files on window.__result
+const MODS = { title: './title.js', logo: './logo.js', worldmap: './worldpaint.js', icons: './icons.js' };
+const q = new URLSearchParams(location.search);
+const what = q.get('what') || 'title';
+try {
+  const t0 = performance.now();
+  const m = await import(MODS[what]);
+  const files = await m.render(q); // [{ name, canvas, type: 'png'|'jpeg', quality }]
+  window.__result = {};
+  for (const f of files) {
+    window.__result[f.name] = f.canvas.toDataURL('image/' + (f.type || 'png'), f.quality || 0.9);
+    if (q.get('show')) document.getElementById('out').appendChild(f.canvas);
+  }
+  document.getElementById('log').textContent = `${what}: ${(performance.now() - t0).toFixed(0)} ms`;
+} catch (e) { document.getElementById('log').textContent = 'ERROR ' + e.stack; window.__error = String(e.stack || e); }
+window.__done = true;
+</script></body></html>

@@ -1,0 +1,22 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Rampart Riot — art generator</title>
+<style>body{margin:0;background:#333;color:#ddd;font:13px monospace} #log{padding:6px} canvas{display:block}</style></head>
+<body><div id="log">generating…</div><div id="out"></div>
+<script type="module">
+import { buildAtlas, contactSheet } from './gen.js';
+const q = new URLSearchParams(location.search);
+const set = q.get('set') || 'towers';
+const log = m => { document.getElementById('log').textContent = m; };
+try {
+  const mod = await import(`./sets/${set}.js?v=${Date.now()}`);
+  const res = await buildAtlas(set, mod, { maxW: +(q.get('maxw') || 2048), maxH: +(q.get('maxh') || 2048) });
+  log(`${set}: ${res.frames.length} frames, ${res.pages.length} pages, ${res.ms.toFixed(0)} ms`);
+  if (q.get('sheet')) {
+    const c = contactSheet(res.frames, { filter: q.get('filter'), cols: +(q.get('cols') || 10), cell: +(q.get('cell') || 140), bg: q.get('bg') ? '#' + q.get('bg') : undefined, zoom: +(q.get('zoom') || 1) });
+    document.getElementById('out').appendChild(c);
+    window.__sheet = { w: c.width, h: c.height };
+  }
+  window.__result = { name: set, json: res.json, pages: res.pages.map(p => p.toDataURL('image/png')), count: res.frames.length };
+} catch (e) { log('ERROR ' + e.stack); window.__error = String(e.stack || e); }
+window.__done = true;
+</script></body></html>

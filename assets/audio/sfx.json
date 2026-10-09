@@ -1,0 +1,1165 @@
+{
+  "sfx": {
+    "ui_click": {
+      "files": [
+        "sfx/ui_click_1.mp3",
+        "sfx/ui_click_2.mp3",
+        "sfx/ui_click_3.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.115,
+      "lufs": -37.7,
+      "peak_db": -15.0,
+      "category": "ui"
+    },
+    "ui_open": {
+      "files": [
+        "sfx/ui_open.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.239,
+      "lufs": -35.2,
+      "peak_db": -15.8,
+      "category": "ui"
+    },
+    "ui_close": {
+      "files": [
+        "sfx/ui_close.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.224,
+      "lufs": -35.4,
+      "peak_db": -15.3,
+      "category": "ui"
+    },
+    "ui_error": {
+      "files": [
+        "sfx/ui_error.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.324,
+      "lufs": -34.3,
+      "peak_db": -15.4,
+      "category": "ui"
+    },
+    "ui_buy": {
+      "files": [
+        "sfx/ui_buy.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.354,
+      "lufs": -34.1,
+      "peak_db": -15.7,
+      "category": "ui"
+    },
+    "ui_star": {
+      "files": [
+        "sfx/ui_star.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 1.182,
+      "lufs": -24.6,
+      "peak_db": -13.3,
+      "category": "ui_reward"
+    },
+    "ui_stars_spend": {
+      "files": [
+        "sfx/ui_stars_spend.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 1.382,
+      "lufs": -23.8,
+      "peak_db": -12.7,
+      "category": "ui_reward"
+    },
+    "ui_page": {
+      "files": [
+        "sfx/ui_page.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.369,
+      "lufs": -30.3,
+      "peak_db": -17.1,
+      "category": "ui"
+    },
+    "ui_achievement": {
+      "files": [
+        "sfx/ui_achievement.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 1.7,
+      "lufs": -21.9,
+      "peak_db": -12.5,
+      "category": "ui_reward"
+    },
+    "ui_unlock": {
+      "files": [
+        "sfx/ui_unlock.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 2.0,
+      "lufs": -22.9,
+      "peak_db": -12.9,
+      "category": "ui_reward"
+    },
+    "ui_flag": {
+      "files": [
+        "sfx/ui_flag.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.409,
+      "lufs": -31.5,
+      "peak_db": -15.7,
+      "category": "ui"
+    },
+    "ui_tick": {
+      "files": [
+        "sfx/ui_tick_1.mp3",
+        "sfx/ui_tick_2.mp3",
+        "sfx/ui_tick_3.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.085,
+      "lufs": -48.9,
+      "peak_db": -21.3,
+      "category": "ui_soft"
+    },
+    "wave_incoming": {
+      "files": [
+        "sfx/wave_incoming.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 2.6,
+      "lufs": -17.1,
+      "peak_db": -6.5,
+      "category": "event"
+    },
+    "wave_early": {
+      "files": [
+        "sfx/wave_early.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 1.25,
+      "lufs": -16.3,
+      "peak_db": -7.3,
+      "category": "event"
+    },
+    "coins": {
+      "files": [
+        "sfx/coins.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.718,
+      "lufs": -23.8,
+      "peak_db": -7.6,
+      "category": "event"
+    },
+    "coin": {
+      "files": [
+        "sfx/coin_1.mp3",
+        "sfx/coin_2.mp3",
+        "sfx/coin_3.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.289,
+      "lufs": -28.2,
+      "peak_db": -9.5,
+      "category": "combat"
+    },
+    "life_lost": {
+      "files": [
+        "sfx/life_lost.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 1.477,
+      "lufs": -19.7,
+      "peak_db": -6.5,
+      "category": "event"
+    },
+    "build_tower": {
+      "files": [
+        "sfx/build_tower.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 1.4,
+      "lufs": -24.4,
+      "peak_db": -6.3,
+      "category": "event"
+    },
+    "upgrade_tower": {
+      "files": [
+        "sfx/upgrade_tower.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 1.352,
+      "lufs": -17.7,
+      "peak_db": -7.0,
+      "category": "event"
+    },
+    "sell_tower": {
+      "files": [
+        "sfx/sell_tower.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 1.362,
+      "lufs": -22.5,
+      "peak_db": -6.5,
+      "category": "event"
+    },
+    "tower_menu": {
+      "files": [
+        "sfx/tower_menu.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.106,
+      "lufs": -37.6,
+      "peak_db": -15.2,
+      "category": "ui"
+    },
+    "rally": {
+      "files": [
+        "sfx/rally.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.718,
+      "lufs": -22.1,
+      "peak_db": -6.7,
+      "category": "event"
+    },
+    "spell_ready": {
+      "files": [
+        "sfx/spell_ready.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.818,
+      "lufs": -25.3,
+      "peak_db": -13.4,
+      "category": "ui_reward"
+    },
+    "victory_cheer": {
+      "files": [
+        "sfx/victory_cheer.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 2.535,
+      "lufs": -19.1,
+      "peak_db": -6.5,
+      "category": "event"
+    },
+    "arrow_shoot": {
+      "files": [
+        "sfx/arrow_shoot_1.mp3",
+        "sfx/arrow_shoot_2.mp3",
+        "sfx/arrow_shoot_3.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.584,
+      "lufs": -27.2,
+      "peak_db": -9.5,
+      "category": "combat"
+    },
+    "arrow_hit": {
+      "files": [
+        "sfx/arrow_hit_1.mp3",
+        "sfx/arrow_hit_2.mp3",
+        "sfx/arrow_hit_3.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.474,
+      "lufs": -30.1,
+      "peak_db": -9.1,
+      "category": "combat"
+    },
+    "arrow_miss": {
+      "files": [
+        "sfx/arrow_miss_1.mp3",
+        "sfx/arrow_miss_2.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.514,
+      "lufs": -29.5,
+      "peak_db": -9.0,
+      "category": "combat"
+    },
+    "crossbow_shoot": {
+      "files": [
+        "sfx/crossbow_shoot_1.mp3",
+        "sfx/crossbow_shoot_2.mp3",
+        "sfx/crossbow_shoot_3.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.654,
+      "lufs": -27.5,
+      "peak_db": -9.4,
+      "category": "combat"
+    },
+    "bolt_pierce": {
+      "files": [
+        "sfx/bolt_pierce.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.738,
+      "lufs": -27.0,
+      "peak_db": -9.4,
+      "category": "combat"
+    },
+    "multishot": {
+      "files": [
+        "sfx/multishot.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.808,
+      "lufs": -22.9,
+      "peak_db": -10.7,
+      "category": "combat"
+    },
+    "magic_cast": {
+      "files": [
+        "sfx/magic_cast_1.mp3",
+        "sfx/magic_cast_2.mp3",
+        "sfx/magic_cast_3.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.499,
+      "lufs": -25.3,
+      "peak_db": -10.3,
+      "category": "combat"
+    },
+    "magic_hit": {
+      "files": [
+        "sfx/magic_hit_1.mp3",
+        "sfx/magic_hit_2.mp3",
+        "sfx/magic_hit_3.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.649,
+      "lufs": -25.1,
+      "peak_db": -9.2,
+      "category": "combat"
+    },
+    "lightning": {
+      "files": [
+        "sfx/lightning_1.mp3",
+        "sfx/lightning_2.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.803,
+      "lufs": -24.1,
+      "peak_db": -6.1,
+      "category": "combat_big"
+    },
+    "frost_cast": {
+      "files": [
+        "sfx/frost_cast_1.mp3",
+        "sfx/frost_cast_2.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 1.028,
+      "lufs": -22.8,
+      "peak_db": -11.7,
+      "category": "combat"
+    },
+    "freeze": {
+      "files": [
+        "sfx/freeze.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.933,
+      "lufs": -23.9,
+      "peak_db": -11.1,
+      "category": "combat"
+    },
+    "ice_shatter": {
+      "files": [
+        "sfx/ice_shatter.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.659,
+      "lufs": -23.0,
+      "peak_db": -6.3,
+      "category": "combat_big"
+    },
+    "blizzard": {
+      "files": [
+        "sfx/blizzard.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 2.8,
+      "lufs": -17.0,
+      "peak_db": -7.2,
+      "category": "combat_big"
+    },
+    "bomb_launch": {
+      "files": [
+        "sfx/bomb_launch_1.mp3",
+        "sfx/bomb_launch_2.mp3",
+        "sfx/bomb_launch_3.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.663,
+      "lufs": -27.7,
+      "peak_db": -9.4,
+      "category": "combat"
+    },
+    "bomb_explode": {
+      "files": [
+        "sfx/bomb_explode_1.mp3",
+        "sfx/bomb_explode_2.mp3",
+        "sfx/bomb_explode_3.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 1.207,
+      "lufs": -20.6,
+      "peak_db": -6.3,
+      "category": "combat_big"
+    },
+    "rocket_launch": {
+      "files": [
+        "sfx/rocket_launch_1.mp3",
+        "sfx/rocket_launch_2.mp3",
+        "sfx/rocket_launch_3.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 1.203,
+      "lufs": -21.9,
+      "peak_db": -9.3,
+      "category": "combat"
+    },
+    "rocket_explode": {
+      "files": [
+        "sfx/rocket_explode_1.mp3",
+        "sfx/rocket_explode_2.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 1.003,
+      "lufs": -20.8,
+      "peak_db": -6.4,
+      "category": "combat_big"
+    },
+    "acid_splash": {
+      "files": [
+        "sfx/acid_splash_1.mp3",
+        "sfx/acid_splash_2.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.898,
+      "lufs": -27.4,
+      "peak_db": -9.9,
+      "category": "combat"
+    },
+    "sizzle": {
+      "files": [
+        "sfx/sizzle.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 1.5,
+      "lufs": -24.8,
+      "peak_db": -9.2,
+      "category": "combat"
+    },
+    "sword_hit": {
+      "files": [
+        "sfx/sword_hit_1.mp3",
+        "sfx/sword_hit_2.mp3",
+        "sfx/sword_hit_3.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.574,
+      "lufs": -29.4,
+      "peak_db": -9.0,
+      "category": "combat"
+    },
+    "sword_swing": {
+      "files": [
+        "sfx/sword_swing_1.mp3",
+        "sfx/sword_swing_2.mp3",
+        "sfx/sword_swing_3.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.688,
+      "lufs": -25.7,
+      "peak_db": -9.5,
+      "category": "combat"
+    },
+    "shield_block": {
+      "files": [
+        "sfx/shield_block.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.569,
+      "lufs": -29.6,
+      "peak_db": -9.3,
+      "category": "combat"
+    },
+    "soldier_death": {
+      "files": [
+        "sfx/soldier_death.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.778,
+      "lufs": -27.3,
+      "peak_db": -8.6,
+      "category": "combat"
+    },
+    "soldier_spawn": {
+      "files": [
+        "sfx/soldier_spawn.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 1.127,
+      "lufs": -27.0,
+      "peak_db": -9.5,
+      "category": "combat"
+    },
+    "wolf_howl": {
+      "files": [
+        "sfx/wolf_howl.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 2.6,
+      "lufs": -16.4,
+      "peak_db": -8.5,
+      "category": "combat_big"
+    },
+    "bash": {
+      "files": [
+        "sfx/bash.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.624,
+      "lufs": -28.8,
+      "peak_db": -9.6,
+      "category": "combat"
+    },
+    "enemy_death": {
+      "files": [
+        "sfx/enemy_death_1.mp3",
+        "sfx/enemy_death_2.mp3",
+        "sfx/enemy_death_3.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.494,
+      "lufs": -23.8,
+      "peak_db": -9.6,
+      "category": "combat"
+    },
+    "enemy_death_big": {
+      "files": [
+        "sfx/enemy_death_big.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 1.207,
+      "lufs": -19.2,
+      "peak_db": -6.5,
+      "category": "combat_big"
+    },
+    "enemy_death_bone": {
+      "files": [
+        "sfx/enemy_death_bone.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.803,
+      "lufs": -26.3,
+      "peak_db": -9.3,
+      "category": "combat"
+    },
+    "enemy_death_magic": {
+      "files": [
+        "sfx/enemy_death_magic.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 1.497,
+      "lufs": -23.0,
+      "peak_db": -10.1,
+      "category": "combat"
+    },
+    "enemy_death_fly": {
+      "files": [
+        "sfx/enemy_death_fly.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.544,
+      "lufs": -24.8,
+      "peak_db": -9.2,
+      "category": "combat"
+    },
+    "enemy_hit_armor": {
+      "files": [
+        "sfx/enemy_hit_armor_1.mp3",
+        "sfx/enemy_hit_armor_2.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.489,
+      "lufs": -30.3,
+      "peak_db": -9.3,
+      "category": "combat"
+    },
+    "enemy_spawn_portal": {
+      "files": [
+        "sfx/enemy_spawn_portal.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 2.2,
+      "lufs": -19.2,
+      "peak_db": -6.2,
+      "category": "combat_big"
+    },
+    "heal": {
+      "files": [
+        "sfx/heal.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 1.282,
+      "lufs": -21.5,
+      "peak_db": -10.9,
+      "category": "combat"
+    },
+    "shield_up": {
+      "files": [
+        "sfx/shield_up.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 1.207,
+      "lufs": -21.0,
+      "peak_db": -12.4,
+      "category": "combat"
+    },
+    "teleport": {
+      "files": [
+        "sfx/teleport.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 1.507,
+      "lufs": -21.3,
+      "peak_db": -12.0,
+      "category": "combat"
+    },
+    "explode_small": {
+      "files": [
+        "sfx/explode_small.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.678,
+      "lufs": -26.8,
+      "peak_db": -9.5,
+      "category": "combat"
+    },
+    "stomp": {
+      "files": [
+        "sfx/stomp.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.728,
+      "lufs": -24.0,
+      "peak_db": -6.4,
+      "category": "combat_big"
+    },
+    "roar": {
+      "files": [
+        "sfx/roar.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 1.796,
+      "lufs": -19.9,
+      "peak_db": -6.4,
+      "category": "combat_big"
+    },
+    "boss_roar": {
+      "files": [
+        "sfx/boss_roar.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 3.4,
+      "lufs": -15.4,
+      "peak_db": -3.5,
+      "category": "big"
+    },
+    "boss_appear": {
+      "files": [
+        "sfx/boss_appear.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 4.6,
+      "lufs": -15.7,
+      "peak_db": -3.4,
+      "category": "big"
+    },
+    "tower_disabled": {
+      "files": [
+        "sfx/tower_disabled.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 1.117,
+      "lufs": -24.4,
+      "peak_db": -9.6,
+      "category": "combat"
+    },
+    "burrow": {
+      "files": [
+        "sfx/burrow.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 1.527,
+      "lufs": -22.1,
+      "peak_db": -9.5,
+      "category": "combat"
+    },
+    "emerge": {
+      "files": [
+        "sfx/emerge.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 1.412,
+      "lufs": -21.7,
+      "peak_db": -6.4,
+      "category": "combat_big"
+    },
+    "ghost": {
+      "files": [
+        "sfx/ghost.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 1.6,
+      "lufs": -21.2,
+      "peak_db": -11.4,
+      "category": "combat"
+    },
+    "splash": {
+      "files": [
+        "sfx/splash.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.778,
+      "lufs": -28.8,
+      "peak_db": -9.0,
+      "category": "combat"
+    },
+    "hero_attack": {
+      "files": [
+        "sfx/hero_attack_1.mp3",
+        "sfx/hero_attack_2.mp3",
+        "sfx/hero_attack_3.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.743,
+      "lufs": -28.6,
+      "peak_db": -9.1,
+      "category": "combat"
+    },
+    "hero_select": {
+      "files": [
+        "sfx/hero_select.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.454,
+      "lufs": -24.7,
+      "peak_db": -12.2,
+      "category": "ui_reward"
+    },
+    "hero_move": {
+      "files": [
+        "sfx/hero_move.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.379,
+      "lufs": -31.8,
+      "peak_db": -16.0,
+      "category": "ui"
+    },
+    "hero_levelup": {
+      "files": [
+        "sfx/hero_levelup.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 1.9,
+      "lufs": -23.3,
+      "peak_db": -12.5,
+      "category": "ui_reward"
+    },
+    "hero_death": {
+      "files": [
+        "sfx/hero_death.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 2.04,
+      "lufs": -18.4,
+      "peak_db": -3.4,
+      "category": "big"
+    },
+    "hero_respawn": {
+      "files": [
+        "sfx/hero_respawn.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 1.6,
+      "lufs": -24.2,
+      "peak_db": -12.5,
+      "category": "ui_reward"
+    },
+    "hero_skill": {
+      "files": [
+        "sfx/hero_skill.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 1.372,
+      "lufs": -19.9,
+      "peak_db": -7.0,
+      "category": "combat_big"
+    },
+    "arrow_rain": {
+      "files": [
+        "sfx/arrow_rain.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 1.766,
+      "lufs": -16.5,
+      "peak_db": -7.6,
+      "category": "combat_big"
+    },
+    "fireball": {
+      "files": [
+        "sfx/fireball.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 1.227,
+      "lufs": -19.0,
+      "peak_db": -6.4,
+      "category": "combat_big"
+    },
+    "ground_slam": {
+      "files": [
+        "sfx/ground_slam.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 1.706,
+      "lufs": -19.5,
+      "peak_db": -3.4,
+      "category": "big"
+    },
+    "meteor_fall": {
+      "files": [
+        "sfx/meteor_fall.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 1.29,
+      "lufs": -16.3,
+      "peak_db": -3.5,
+      "category": "big"
+    },
+    "meteor_impact": {
+      "files": [
+        "sfx/meteor_impact.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 2.285,
+      "lufs": -14.8,
+      "peak_db": -3.5,
+      "category": "big"
+    },
+    "reinforcements": {
+      "files": [
+        "sfx/reinforcements.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 1.851,
+      "lufs": -16.5,
+      "peak_db": -6.2,
+      "category": "event"
+    },
+    "sheep": {
+      "files": [
+        "sfx/sheep.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 1.192,
+      "lufs": -25.5,
+      "peak_db": -11.4,
+      "category": "creature"
+    },
+    "sheep_pop": {
+      "files": [
+        "sfx/sheep_pop.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.773,
+      "lufs": -26.7,
+      "peak_db": -11.6,
+      "category": "creature"
+    },
+    "frog": {
+      "files": [
+        "sfx/frog.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.793,
+      "lufs": -27.7,
+      "peak_db": -11.5,
+      "category": "creature"
+    },
+    "crow": {
+      "files": [
+        "sfx/crow_1.mp3",
+        "sfx/crow_2.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 1.177,
+      "lufs": -24.4,
+      "peak_db": -11.6,
+      "category": "creature"
+    },
+    "chicken": {
+      "files": [
+        "sfx/chicken.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 1.307,
+      "lufs": -23.8,
+      "peak_db": -13.6,
+      "category": "creature"
+    },
+    "bell_toll": {
+      "files": [
+        "sfx/bell_toll.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 3.033,
+      "lufs": -24.1,
+      "peak_db": -12.0,
+      "category": "creature"
+    },
+    "windmill": {
+      "files": [
+        "sfx/windmill.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 2.0,
+      "lufs": -27.7,
+      "peak_db": -11.2,
+      "category": "creature"
+    },
+    "fish_splash": {
+      "files": [
+        "sfx/fish_splash.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.733,
+      "lufs": -29.9,
+      "peak_db": -11.4,
+      "category": "creature"
+    },
+    "snowman": {
+      "files": [
+        "sfx/snowman.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.384,
+      "lufs": -27.4,
+      "peak_db": -11.0,
+      "category": "creature"
+    },
+    "bubble": {
+      "files": [
+        "sfx/bubble_1.mp3",
+        "sfx/bubble_2.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.579,
+      "lufs": -27.0,
+      "peak_db": -13.1,
+      "category": "creature"
+    },
+    "lava_burst": {
+      "files": [
+        "sfx/lava_burst.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 1.098,
+      "lufs": -24.7,
+      "peak_db": -13.3,
+      "category": "creature"
+    },
+    "chime_secret": {
+      "files": [
+        "sfx/chime_secret.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 2.0,
+      "lufs": -23.8,
+      "peak_db": -13.8,
+      "category": "ui_reward"
+    },
+    "cine_boom": {
+      "files": [
+        "sfx/cine_boom.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 3.3,
+      "lufs": -17.4,
+      "peak_db": -3.4,
+      "category": "cine"
+    },
+    "cine_whoosh": {
+      "files": [
+        "sfx/cine_whoosh_1.mp3",
+        "sfx/cine_whoosh_2.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 2.2,
+      "lufs": -15.5,
+      "peak_db": -3.5,
+      "category": "cine"
+    },
+    "cine_riser": {
+      "files": [
+        "sfx/cine_riser.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 3.029,
+      "lufs": -13.3,
+      "peak_db": -3.5,
+      "category": "cine"
+    },
+    "cine_thunder": {
+      "files": [
+        "sfx/cine_thunder.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 4.2,
+      "lufs": -17.6,
+      "peak_db": -3.5,
+      "category": "cine"
+    },
+    "wall_crack": {
+      "files": [
+        "sfx/wall_crack.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 2.8,
+      "lufs": -20.0,
+      "peak_db": -3.7,
+      "category": "cine"
+    },
+    "beacon_ignite": {
+      "files": [
+        "sfx/beacon_ignite.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 1.9,
+      "lufs": -18.4,
+      "peak_db": -3.4,
+      "category": "cine"
+    },
+    "fire_crackle": {
+      "files": [
+        "sfx/fire_crackle.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 3.0,
+      "lufs": -23.6,
+      "peak_db": -3.4,
+      "category": "cine"
+    },
+    "heartbeat": {
+      "files": [
+        "sfx/heartbeat.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 1.437,
+      "lufs": -19.8,
+      "peak_db": -3.5,
+      "category": "cine"
+    },
+    "sword_draw": {
+      "files": [
+        "sfx/sword_draw.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.853,
+      "lufs": -17.0,
+      "peak_db": -7.3,
+      "category": "event"
+    },
+    "gate_break": {
+      "files": [
+        "sfx/gate_break.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 2.6,
+      "lufs": -19.8,
+      "peak_db": -3.3,
+      "category": "cine"
+    },
+    "star_rise": {
+      "files": [
+        "sfx/star_rise.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 4.6,
+      "lufs": -15.0,
+      "peak_db": -6.3,
+      "category": "cine"
+    },
+    "typewriter": {
+      "files": [
+        "sfx/typewriter_1.mp3",
+        "sfx/typewriter_2.mp3",
+        "sfx/typewriter_3.mp3"
+      ],
+      "gain": 1.0,
+      "duration": 0.095,
+      "lufs": -46.4,
+      "peak_db": -22.1,
+      "category": "ui_soft"
+    }
+  },
+  "amb": {
+    "amb_meadow": {
+      "file": "amb/amb_meadow.mp3",
+      "loopLength": 30.0,
+      "overlap": 2.0,
+      "gain": 1.0,
+      "duration": 32.0,
+      "lufs": -27.3
+    },
+    "amb_snow": {
+      "file": "amb/amb_snow.mp3",
+      "loopLength": 30.0,
+      "overlap": 2.0,
+      "gain": 1.0,
+      "duration": 32.0,
+      "lufs": -26.4
+    },
+    "amb_swamp": {
+      "file": "amb/amb_swamp.mp3",
+      "loopLength": 30.0,
+      "overlap": 2.0,
+      "gain": 1.0,
+      "duration": 32.0,
+      "lufs": -27.3
+    },
+    "amb_volcano": {
+      "file": "amb/amb_volcano.mp3",
+      "loopLength": 30.0,
+      "overlap": 2.0,
+      "gain": 1.0,
+      "duration": 32.0,
+      "lufs": -26.4
+    },
+    "amb_night": {
+      "file": "amb/amb_night.mp3",
+      "loopLength": 30.0,
+      "overlap": 2.0,
+      "gain": 1.0,
+      "duration": 32.0,
+      "lufs": -28.4
+    },
+    "amb_battle_far": {
+      "file": "amb/amb_battle_far.mp3",
+      "loopLength": 30.0,
+      "overlap": 2.0,
+      "gain": 1.0,
+      "duration": 32.0,
+      "lufs": -31.4
+    }
+  }
+}

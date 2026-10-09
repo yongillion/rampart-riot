@@ -1,0 +1,256 @@
+{
+  "title": {
+    "file": "music/title.mp3",
+    "loop": true,
+    "loopLength": 87.2727,
+    "tail": 3.5,
+    "duration": 90.773,
+    "bpm": 88,
+    "lufs": -16.0,
+    "bars": 32,
+    "cues": {
+      "intro": 0.0,
+      "theme": 10.909,
+      "theme_full": 32.727,
+      "oath": 54.545,
+      "bridge": 76.364
+    }
+  },
+  "worldmap": {
+    "file": "music/worldmap.mp3",
+    "loop": true,
+    "loopLength": 76.8,
+    "tail": 3.0,
+    "duration": 79.8,
+    "bpm": 100,
+    "lufs": -16.0,
+    "bars": 32,
+    "cues": {
+      "intro": 0.0,
+      "theme": 9.6,
+      "theme2": 28.8,
+      "journey": 48.0,
+      "turn": 67.2
+    }
+  },
+  "battle1": {
+    "file": "music/battle1.mp3",
+    "loop": true,
+    "loopLength": 112.0,
+    "tail": 3.0,
+    "duration": 115.0,
+    "bpm": 120,
+    "lufs": -16.0,
+    "bars": 56,
+    "cues": {
+      "intro": 0.0,
+      "melodyA": 8.0,
+      "melodyA2": 24.0,
+      "rampart": 40.0,
+      "melodyB": 48.0,
+      "development": 64.0,
+      "tuttiA": 80.0,
+      "tuttiB": 96.0
+    }
+  },
+  "battle2": {
+    "file": "music/battle2.mp3",
+    "loop": true,
+    "loopLength": 102.8571,
+    "tail": 3.0,
+    "duration": 105.857,
+    "bpm": 112,
+    "lufs": -16.0,
+    "bars": 48,
+    "cues": {
+      "intro": 0.0,
+      "march": 8.571,
+      "rampart": 25.714,
+      "soar": 42.857,
+      "march2": 60.0,
+      "rampart_tutti": 77.143,
+      "build": 94.286
+    }
+  },
+  "battle3": {
+    "file": "music/battle3.mp3",
+    "loop": true,
+    "loopLength": 110.7692,
+    "tail": 3.5,
+    "duration": 114.269,
+    "bpm": 104,
+    "lufs": -16.0,
+    "bars": 48,
+    "cues": {
+      "intro": 0.0,
+      "chant": 9.231,
+      "rampart": 27.692,
+      "eerie": 46.154,
+      "chant_tutti": 64.615,
+      "rampart_climax": 83.077,
+      "turnaround": 101.538
+    }
+  },
+  "battle4": {
+    "file": "music/battle4.mp3",
+    "loop": true,
+    "loopLength": 109.0909,
+    "tail": 3.0,
+    "duration": 112.091,
+    "bpm": 132,
+    "lufs": -16.0,
+    "bars": 60,
+    "cues": {
+      "intro": 0.0,
+      "march": 7.273,
+      "rampart": 21.818,
+      "fanfare": 36.364,
+      "chant": 50.909,
+      "canon": 65.455,
+      "rampart_tutti": 80.0,
+      "march_tutti": 94.545
+    }
+  },
+  "boss": {
+    "file": "music/boss.mp3",
+    "loop": true,
+    "loopLength": 89.1429,
+    "tail": 3.0,
+    "duration": 92.143,
+    "bpm": 140,
+    "lufs": -16.0,
+    "bars": 52,
+    "cues": {
+      "stabs": 0.0,
+      "head": 6.857,
+      "boss_motif": 20.571,
+      "choir": 34.286,
+      "build": 48.0,
+      "canon": 61.714,
+      "tutti": 75.429
+    }
+  },
+  "victory": {
+    "file": "music/victory.mp3",
+    "loop": false,
+    "tail": 1.6,
+    "duration": 7.6,
+    "bpm": 100,
+    "lufs": -15.0,
+    "cues": {
+      "head": 0.0,
+      "cadence": 2.4,
+      "final_chord": 4.8
+    }
+  },
+  "defeat": {
+    "file": "music/defeat.mp3",
+    "loop": false,
+    "tail": 1.6,
+    "duration": 6.6,
+    "bpm": 60,
+    "lufs": -15.0,
+    "cues": {
+      "descent": 0.0,
+      "dark_chord": 4.0
+    }
+  },
+  "story_somber": {
+    "file": "music/story_somber.mp3",
+    "loop": true,
+    "loopLength": 64.0,
+    "tail": 4.0,
+    "duration": 68.0,
+    "bpm": 60,
+    "lufs": -19.0,
+    "bars": 16,
+    "cues": {
+      "lament": 16.0,
+      "violins": 32.0,
+      "coda": 48.0
+    }
+  },
+  "story_tension": {
+    "file": "music/story_tension.mp3",
+    "loop": true,
+    "loopLength": 53.3333,
+    "tail": 4.0,
+    "duration": 57.333,
+    "bpm": 90,
+    "lufs": -19.0,
+    "bars": 20,
+    "cues": {
+      "heartbeat": 10.667,
+      "horn_echo": 21.333,
+      "intensify": 32.0,
+      "recede": 42.667
+    }
+  },
+  "story_hope": {
+    "file": "music/story_hope.mp3",
+    "loop": true,
+    "loopLength": 66.6667,
+    "tail": 4.0,
+    "duration": 70.667,
+    "bpm": 72,
+    "lufs": -19.0,
+    "bars": 20,
+    "cues": {
+      "oath_flute": 6.667,
+      "oath_strings": 33.333,
+      "turn": 60.0
+    }
+  },
+  "opening": {
+    "file": "music/opening.mp3",
+    "loop": false,
+    "tail": 3.0,
+    "duration": 91.0,
+    "bpm": 96,
+    "lufs": -16.1,
+    "cues": {
+      "void": 0.0,
+      "bell": 2.0,
+      "impact": 7.5,
+      "ashen_host": 10.0,
+      "the_wall": 20.0,
+      "wall_chord": 37.5,
+      "forgotten": 40.0,
+      "beacons": 50.0,
+      "beacon1": 55.0,
+      "beacon2": 56.25,
+      "beacon3": 57.5,
+      "beacon4": 58.75,
+      "beacon5": 60.0,
+      "beacon6": 61.25,
+      "beacon7": 62.5,
+      "beacon8": 63.75,
+      "breach": 65.0,
+      "warden_call": 67.5,
+      "build": 70.0,
+      "silence": 72.2,
+      "title_slam": 72.5,
+      "final_chord": 82.5,
+      "end": 91.0
+    }
+  },
+  "ending": {
+    "file": "music/ending.mp3",
+    "loop": false,
+    "tail": 6.67,
+    "duration": 120.003,
+    "bpm": 72,
+    "lufs": -17.0,
+    "cues": {
+      "ash_snow": 0.0,
+      "the_walk": 13.333,
+      "sacrifice": 40.0,
+      "climax": 46.667,
+      "dawn": 46.667,
+      "years_later": 73.333,
+      "her_name": 100.0,
+      "final_chord": 106.667,
+      "end": 120.0
+    }
+  }
+}

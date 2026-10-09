@@ -1,0 +1,21 @@
+html, body {
+  margin: 0; padding: 0; width: 100%; height: 100%;
+  overflow: hidden; background: #000; color: #eee;
+  position: fixed; inset: 0;
+  touch-action: none; overscroll-behavior: none;
+  -webkit-user-select: none; user-select: none;
+  -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+}
+#stage { position: fixed; left: 0; top: 0; transform-origin: 0 0; overflow: hidden; background: #000; }
+#game { display: block; width: 100%; height: 100%; touch-action: none; outline: none; }
+#boot {
+  position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: radial-gradient(ellipse at center, #2a1a10 0%, #070402 75%); z-index: 5; transition: opacity .5s;
+  font-family: Georgia, serif; pointer-events: none;
+}
+#boot.hide { opacity: 0; }
+.boot-title { font-size: 28px; letter-spacing: 6px; color: #e9c46a; text-shadow: 0 2px 0 #3a1d07, 0 0 18px rgba(255,140,40,.35); margin-bottom: 18px; }
+.boot-bar { width: 220px; height: 8px; border: 2px solid #6b4a24; border-radius: 6px; background: #1a0f06; overflow: hidden; }
+.boot-bar i { display: block; height: 100%; width: 0; background: linear-gradient(#ffd36b, #d9861d); transition: width .2s; }
+.noscript { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; font: 18px sans-serif; }

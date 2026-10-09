@@ -1,0 +1,30 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Rampart Riot — map painter</title>
+<style>body{margin:0;background:#222;color:#ddd;font:12px monospace}canvas{display:block;max-width:100%}</style></head>
+<body><div id="log">painting…</div><div id="out"></div>
+<script type="module">
+import { paintMap } from './genmap.js';
+import { getLevel } from '../../js/data/levels/index.js';
+const q = new URLSearchParams(location.search);
+const id = q.get('stage') || '1-1';
+try {
+  const lv = id === 'test' ? (await import('../sim/testlevel.mjs')).default : getLevel(id);
+  const t0 = performance.now();
+  const cv = paintMap(lv, { scale: +(q.get('scale') || 1) });
+  document.getElementById('log').textContent = `${id}: ${(performance.now() - t0).toFixed(0)} ms`;
+  if (q.get('overlay')) {
+    const g = cv.getContext('2d');
+    g.save();
+    const { Path } = await import('../../js/game/path.js');
+    g.strokeStyle = 'rgba(255,0,0,0.6)'; g.lineWidth = 2;
+    lv.paths.forEach((p, i) => { const P = new Path(p.pts); g.beginPath(); for (let k = 0; k < P.n; k += 3) k ? g.lineTo(P.xs[k], P.ys[k]) : g.moveTo(P.xs[k], P.ys[k]); g.stroke(); g.fillStyle = 'red'; g.font = '28px sans-serif'; g.fillText('P' + i, P.xs[10], P.ys[10] - 10); });
+    lv.plots.forEach(([x, y], i) => { g.strokeStyle = 'rgba(255,255,0,0.95)'; g.lineWidth = 3; g.beginPath(); g.ellipse(x, y, 46, 21, 0, 0, Math.PI * 2); g.stroke(); g.fillStyle = '#ff0'; g.font = '22px sans-serif'; g.fillText(String(i), x - 6, y + 8); });
+    if (lv.hero) { g.fillStyle = 'cyan'; g.beginPath(); g.arc(lv.hero[0], lv.hero[1], 10, 0, 7); g.fill(); }
+    g.strokeStyle = 'rgba(255,255,255,0.5)'; g.lineWidth = 2; g.strokeRect(240, 135, 1920, 1080);
+    g.restore();
+  }
+  document.getElementById('out').appendChild(cv);
+  window.__result = { jpg: cv.toDataURL('image/jpeg', +(q.get('q') || 0.86)) };
+} catch (e) { document.getElementById('log').textContent = 'ERROR ' + e.stack; window.__error = String(e.stack || e); }
+window.__done = true;
+</script></body></html>
